@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             let products = data; // Constante para trabajar sobre la info de cada producto.
             
-            console.log(products)
             // Función que muestra los productos
             function showProducts(array){
                 let content = "";
+                if(array.length > 0){
                 array.forEach(product => {
                     content += 
                     `
@@ -25,8 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p>${product.price}</p>
                     </div>
                     `;
+
                 contenedor.innerHTML = content;
                 });
+            } else {
+                contenedor.innerHTML = `<div class="alert-danger alert bg-danger mt-4 mx-auto text-white p-3">No se encontraron productos</div>`;
+            }
             }
             
             showProducts(products);
@@ -41,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 let productosRangoPrecio =   
                 products.filter((product) => product.price >= precioMin && product.price <= precioMax);
-
+                
                 showProducts(productosRangoPrecio);
 
             });        
